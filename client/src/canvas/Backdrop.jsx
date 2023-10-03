@@ -1,10 +1,14 @@
 import React, { useRef } from 'react';
 import { easing } from 'maath';
 import { useFrame } from '@react-three/fiber';
+import state from '../store'
+import { useSnapshot } from 'valtio';
 import { AccumulativeShadows, RandomizedLight } from '@react-three/drei';
 
 const Backdrop = () => {
   const shadows = useRef();
+  const snap = useSnapshot(state);
+  
   return (
     <AccumulativeShadows
       ref={shadows}
@@ -13,7 +17,7 @@ const Backdrop = () => {
       alphaTest={0.85}
       scale={10}
       bias={0.0005}
-      color='#FFBB11'
+      color={snap.color}
       rotation={[Math.PI / 2, 0 ,0]}
       position={[0, 0, -0.14]}
     >
